@@ -1,0 +1,147 @@
+state,district,anomaly_months,stat_count,ml_count
+Chhattisgarh,Khairagarh Chhuikhadan Gandai,10,10.0,0.0
+Assam,Sribhumi,10,10.0,0.0
+Meghalaya,Eastern West Khasi Hills,10,10.0,0.0
+Chhattisgarh,Mohla-Manpur-Ambagarh Chouki,10,10.0,0.0
+West Bengal,Koch Bihar,10,10.0,0.0
+Chhattisgarh,Manendragarh–Chirmiri–Bharatpur,9,9.0,0.0
+Karnataka,Bengaluru South,9,9.0,0.0
+Maharashtra,Chhatrapati Sambhajinagar,8,8.0,0.0
+West Bengal,Darjiling,7,7.0,0.0
+West Bengal,South Dinajpur,7,7.0,0.0
+Delhi,South East Delhi,7,7.0,0.0
+Chhattisgarh,Sakti,7,7.0,0.0
+Maharashtra,Chatrapati Sambhaji Nagar,6,6.0,0.0
+Maharashtra,Dharashiv,6,6.0,0.0
+Assam,Tamulpur District,6,6.0,0.0
+Chhattisgarh,Sarangarh-Bilaigarh,6,6.0,0.0
+Telangana,Vikarabad,6,6.0,0.0
+Assam,Bajali,5,5.0,0.0
+West Bengal,Cooch Behar,5,5.0,0.0
+Telangana,Narayanpet,5,5.0,0.0
+Telangana,Jayashankar Bhupalpally,4,4.0,0.0
+Delhi,Shahdara,4,4.0,0.0
+Manipur,Kakching,4,4.0,0.0
+Meghalaya,East Garo Hills,4,4.0,0.0
+Telangana,Rangareddy,4,4.0,0.0
+West Bengal,North Dinajpur,4,4.0,0.0
+Assam,South Salmara Mankachar,4,4.0,0.0
+Sikkim,Namchi,3,3.0,0.0
+Mizoram,Khawzawl,3,3.0,0.0
+Dadra and Nagar Haveli and Daman and Diu,Daman,3,3.0,0.0
+Assam,Dima Hasao,3,3.0,0.0
+Bihar,Bhabua,3,3.0,0.0
+Bihar,Purba Champaran,3,3.0,0.0
+Dadra and Nagar Haveli and Daman and Diu,Dadra and Nagar Haveli,3,3.0,0.0
+Arunachal Pradesh,Kurung Kumey,3,3.0,0.0
+Arunachal Pradesh,Kamle,3,3.0,0.0
+Nagaland,Meluri,3,3.0,0.0
+Nagaland,Chumukedima,3,3.0,0.0
+West Bengal,Jalpaiguri,3,3.0,0.0
+Telangana,Yadadri.,3,3.0,0.0
+Assam,West Karbi Anglong,2,2.0,0.0
+Dadra and Nagar Haveli and Daman and Diu,Diu,2,2.0,0.0
+Telangana,Komaram Bheem,2,2.0,0.0
+Telangana,Wanaparthy,2,2.0,0.0
+West  Bengal,Hooghly,2,2.0,0.0
+West Bengal,Kalimpong,2,2.0,0.0
+Telangana,Mulugu,2,2.0,0.0
+Andhra Pradesh,Sri Potti Sriramulu Nellore,2,2.0,0.0
+Andhra Pradesh,Anakapalli,2,2.0,0.0
+Andhra Pradesh,Annamayya,2,2.0,0.0
+Bihar,Bhojpur,2,2.0,0.0
+Bihar,Nalanda,2,2.0,0.0
+Jharkhand,Pakaur,2,2.0,0.0
+Madhya Pradesh,Mauganj,2,2.0,0.0
+Chhattisgarh,Dantewada,2,2.0,0.0
+Meghalaya,North Garo Hills,2,2.0,0.0
+Chhattisgarh,Narayanpur,2,2.0,0.0
+Nagaland,Shamator,2,2.0,0.0
+Andhra Pradesh,Eluru,1,1.0,0.0
+Andhra Pradesh,Dr. B. R. Ambedkar Konaseema,1,1.0,0.0
+Andhra Pradesh,Bapatla,1,1.0,0.0
+Andhra Pradesh,Kakinada,1,1.0,0.0
+Andaman and Nicobar Islands,Nicobar,1,1.0,0.0
+Andhra Pradesh,N. T. R,1,1.0,0.0
+Andhra Pradesh,Nandyal,1,1.0,0.0
+Andhra Pradesh,Palnadu,1,1.0,0.0
+Arunachal Pradesh,West Siang,1,1.0,0.0
+Arunachal Pradesh,Tawang,1,1.0,0.0
+Arunachal Pradesh,Namsai,1,1.0,0.0
+Andhra Pradesh,Tirupati,1,1.0,0.0
+Andhra Pradesh,Sri Sathya Sai,1,1.0,0.0
+Bihar,Monghyr,1,1.0,0.0
+Jammu and Kashmir,Kulgam,1,1.0,0.0
+Bihar,Jehanabad,1,1.0,0.0
+Gujarat,Dahod,1,1.0,0.0
+Chhattisgarh,Uttar Bastar Kanker,1,1.0,0.0
+Bihar,Samstipur,1,1.0,0.0
+Bihar,West Champaran,1,1.0,0.0
+Bihar,Patna,1,1.0,0.0
+Bihar,Pashchim Champaran,1,1.0,0.0
+Assam,North Cachar Hills,1,1.0,0.0
+Assam,Karbi Anglong,1,1.0,0.0
+Maharashtra,Wardha,1,1.0,0.0
+Maharashtra,Raigad,1,1.0,0.0
+Maharashtra,Nandurbar *,1,1.0,0.0
+Maharashtra,Nandurbar,1,1.0,0.0
+Maharashtra,Jalgaon,1,1.0,0.0
+Madhya Pradesh,Niwari,1,1.0,0.0
+Maharashtra,Akola,1,1.0,0.0
+Maharashtra,Bid,1,1.0,0.0
+Kerala,Thiruvananthapuram,1,1.0,0.0
+Madhya Pradesh,Harda,1,1.0,0.0
+Kerala,Pathanamthitta,1,1.0,0.0
+Madhya Pradesh,Harda *,1,1.0,0.0
+Kerala,Kannur,1,1.0,0.0
+Kerala,Kasargod,1,1.0,0.0
+Kerala,Kollam,1,1.0,1.0
+Kerala,Kottayam,1,1.0,0.0
+Gujarat,Sabar Kantha,1,1.0,0.0
+Jammu and Kashmir,Shupiyan,1,1.0,0.0
+Jammu and Kashmir,Ramban,1,1.0,0.0
+Jammu and Kashmir,Punch,1,1.0,0.0
+Kerala,Ernakulam,1,1.0,0.0
+Kerala,Alappuzha,1,1.0,0.0
+Karnataka,Haveri *,1,1.0,0.0
+Jharkhand,Chatra,1,1.0,0.0
+Gujarat,Dohad,1,1.0,0.0
+Nagaland,Phek,1,1.0,0.0
+Manipur,Ukhrul,1,1.0,0.0
+Meghalaya,South Garo Hills,1,1.0,0.0
+Mizoram,Saitual,1,1.0,0.0
+Manipur,Bishnupur,1,1.0,0.0
+Manipur,Chandel,1,1.0,0.0
+Manipur,Jiribam,1,1.0,0.0
+Telangana,Jogulamba Gadwal,1,1.0,0.0
+Tamil Nadu,Kallakurichi,1,1.0,0.0
+Tamil Nadu,Chengalpattu,1,1.0,0.0
+Sikkim,West Sikkim,1,1.0,0.0
+Sikkim,North Sikkim,1,1.0,0.0
+Sikkim,West,1,1.0,0.0
+Rajasthan,Jaisalmer,1,1.0,0.0
+Rajasthan,Jalore,1,1.0,0.0
+Orissa,Sonapur,1,1.0,0.0
+Orissa,Mayurbhanj,1,1.0,0.0
+Rajasthan,Deeg ,1,1.0,0.0
+Punjab,Kapurthala,1,1.0,0.0
+Nagaland,Wokha,1,1.0,0.0
+Meghalaya,West Khasi Hills,1,1.0,0.0
+Nagaland,Niuland,1,1.0,0.0
+Telangana,Medchal-malkajgiri,1,1.0,0.0
+Uttar Pradesh,Bulandshahar,1,1.0,0.0
+Uttar Pradesh,Bhadohi,1,1.0,0.0
+Uttar Pradesh,Ayodhya,1,1.0,0.0
+Telangana,Warangal Rural,1,1.0,0.0
+Telangana,Suryapet,1,1.0,0.0
+Telangana,Mahabubabad,1,1.0,0.0
+Telangana,Nagarkurnool,1,1.0,0.0
+Telangana,Siddipet,1,1.0,0.0
+West Bengal,Hugli,1,1.0,0.0
+West Bengal,HOWRAH,1,1.0,0.0
+Uttar Pradesh,Kushinagar *,1,1.0,0.0
+West Bengal,Dakshin Dinajpur,1,1.0,0.0
+West Bengal,MALDA,1,1.0,0.0
+West Bengal,Jhargram,1,1.0,0.0
+West Bengal,Purba Bardhaman,1,1.0,0.0
+West Bengal,Purulia,1,1.0,0.0
