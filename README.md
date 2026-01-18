@@ -1,177 +1,219 @@
 # UIDAI Hackathon 2026  
-## Post-Stabilization Anomaly Detection in Aadhaar Update Patterns
+## Detecting Post-Stabilization Anomalies in Aadhaar Update Activity
 
 ---
 
-## Problem Statement
+## 1. Background & Motivation
 
-The UIDAI (Aadhaar) ecosystem processes large-scale **enrolments**, **demographic updates**, and **biometric updates** across India.  
-While regular updates are expected, **unusual or inconsistent update patterns** at the district level may indicate:
+The Aadhaar ecosystem continuously processes:
+- **New enrolments**
+- **Demographic updates** (name, address, DOB, etc.)
+- **Biometric updates** (fingerprints, iris, etc.)
 
-- operational inefficiencies  
-- system migration or rollout effects  
+At a national scale, **updates are expected** — people move, age, correct details.  
+However, **unusual patterns of updates** at the **district level** may indicate:
+
+- operational bottlenecks  
+- abnormal update behavior  
 - data pipeline inconsistencies  
-- regions requiring audit or policy attention  
+- regions that require administrative review  
 
-The challenge is to **identify meaningful, localized anomalies** while avoiding false positives caused by **system-wide initialization noise**.
-
----
-
-## Objective
-
-Build a **reproducible, audit-ready anomaly detection pipeline** that:
-
-1. Validates temporal integrity of UIDAI datasets  
-2. Normalizes update behavior across districts of different sizes  
-3. Detects anomalies using both statistical and ML methods  
-4. Filters rollout-phase noise to isolate steady-state behavior  
-5. Produces interpretable, actionable outputs for decision-making  
+The challenge is **not** to flag every spike, but to identify **meaningful, localized anomalies** while ignoring **system-wide noise**.
 
 ---
 
-## Data Overview
+## 2. Problem Statement (Reframed Clearly)
 
-Three UIDAI API datasets were analyzed:
+> How can we reliably detect **district-level abnormal Aadhaar update behavior** while separating it from:
+> - national system rollouts
+> - seasonal effects
+> - population size differences?
 
-| Dataset | Description |
-|------|-----------|
-| Aadhaar Enrolment | New enrolments by age group |
-| Demographic Updates | Demographic changes |
-| Biometric Updates | Biometric changes |
+The solution must be:
+- scalable  
+- interpretable  
+- reproducible  
+- suitable for audit and governance  
 
-**Coverage:** January 2025 – December 2025  
-**Granularity:** Aggregated to district-month level  
+---
+
+## 3. Data Used
+
+We analyzed three UIDAI API datasets:
+
+| Dataset | What it Represents |
+|------|------------------|
+| Aadhaar Enrolment | New Aadhaar creations |
+| Demographic Updates | Changes in demographic attributes |
+| Biometric Updates | Changes in biometric attributes |
+
+**Time Range:** January 2025 – December 2025  
+**Granularity:** District-level, aggregated monthly  
 
 > Raw data is excluded from the repository due to size and sensitivity.
 
 ---
 
-## Methodology
+## 4. Step-by-Step Methodology
 
-### 1. Data Audit & Temporal Validation  
-**Script:** `scripts/run_audit.py`
+### Step 1: Data Audit & Integrity Checks  
+**Script:** `run_audit.py`
 
-- Verified date ranges, null dates, and negative values  
-- Identified large global instability during **Jan–Feb 2025**
+Before any modeling, we validated the data:
+- checked date ranges
+- counted null dates
+- verified negative values
+- measured monthly coverage
 
-**Conclusion:** Early-period anomalies represent **system initialization**, not localized risk.
+#### Key Finding
+- **Jan–Feb 2025 shows extreme volatility nationwide**
+- This volatility appears **uniform across India**, indicating **system initialization / rollout effects**, not district-specific issues
 
----
-
-### 2. Temporal Aggregation  
-**Script:** `scripts/run_temporal_aggregation.py`
-
-- Aggregated daily records to **(state, district, year_month)**  
-- Removed high-frequency noise and aligned with reporting cycles  
-
----
-
-### 3. Feature Engineering  
-**Script:** `scripts/run_feature_engineering.py`
-
-Engineered normalized behavioral features:
-- Demographic update rate  
-- Biometric update rate  
-- Update imbalance across modalities  
-- Month-over-month change  
-- Within-district Z-scores  
-
-This ensures fair comparison across districts of different scales.
+📌 **Important Insight:**  
+Early spikes should **not** be treated as anomalies.
 
 ---
 
-### 4. Dual Anomaly Detection  
-**Core Logic:** `src/anomaly_detection.py`  
-**Runner:** `scripts/run_anomaly_detection.py`
+### Step 2: Temporal Aggregation  
+**Script:** `run_temporal_aggregation.py`
 
-Two complementary methods were applied:
-
-- **Statistical Detection:** Z-score and imbalance thresholds (highly interpretable)  
-- **ML Detection:** Isolation Forest (unsupervised, multivariate rarity)  
-
-Outputs from both were retained for comparison.
+- Daily records were aggregated into **district × month**
+- This aligns analysis with policy and reporting cycles
+- Reduces noise from daily operational fluctuations
 
 ---
 
-### 5. Anomaly Diagnostics  
-**Script:** `scripts/run_anomaly_diagnostics.py`
+### Step 3: Feature Engineering (Core Intelligence Layer)  
+**Script:** `run_feature_engineering.py`
 
-- Analyzed overlap between statistical and ML anomalies  
-- Identified **high-confidence anomalies** where both methods agreed  
+Raw counts alone are misleading.  
+Large districts naturally have more updates.
 
----
+We engineered **normalized behavioral metrics**, including:
 
-### 6. Post-Stabilization Filtering  
-**Script:** `scripts/run_post_stabilization_filter.py`
+#### Key Metrics Explained
 
-- Explicitly removed **Jan–Feb 2025** (system rollout phase)  
-- Retained **Mar–Dec 2025** as steady-state operational data  
+| Metric | Meaning |
+|-----|-------|
+| Demographic Update Rate | How frequently demographic changes occur relative to baseline |
+| Biometric Update Rate | Frequency of biometric changes |
+| Update Imbalance Score | Mismatch between demographic and biometric activity |
+| Month-over-Month Change | Sudden jumps in update behavior |
+| District Z-Score | How abnormal a district is relative to itself |
 
-**Result:** 340 actionable post-stabilization anomalies.
-
----
-
-### 7. District Risk Ranking  
-**Script:** `scripts/run_district_ranking.py`
-
-Districts were ranked by:
-- number of anomalous months  
-- persistence over time  
-
-This prioritizes **sustained abnormal behavior**, not one-off spikes.
+📌 These metrics allow **fair comparison across districts of different sizes**.
 
 ---
 
-## Key Insight (Case Study)
+### Step 4: Dual Anomaly Detection  
+**Core Logic:** `anomaly_detection.py`
 
-**Kollam, Kerala — April 2025**
+We deliberately used **two independent approaches**:
 
-- Detected after system stabilization  
-- Flagged by both statistical and ML methods  
-- Deviated significantly from its own historical baseline  
+#### A. Statistical Detection
+- Z-score thresholds
+- imbalance conditions
+- fully interpretable
 
-This represents a **high-confidence, audit-worthy anomaly**.
+#### B. Machine Learning Detection
+- Isolation Forest
+- unsupervised, multivariate
+- detects rare combinations of behaviors
+
+📌 **Why both?**  
+- Statistical → explainable  
+- ML → robust to complex patterns  
+
+Only overlapping signals are considered **high confidence**.
 
 ---
 
-## Visual Outputs  
-**Script:** `scripts/run_visualizations.py`
+### Step 5: Anomaly Diagnostics  
+**Script:** `run_anomaly_diagnostics.py`
 
-Generated judge-ready artifacts:
-- Monthly anomaly trend (rollout vs steady-state separation)  
-- Top districts by persistent anomalies  
-- Kollam district case study  
+We analyzed:
+- how many anomalies are detected by each method
+- how many overlap
+
+#### Result Summary
+- Statistical only → many (sensitive)
+- ML only → fewer (conservative)
+- **Overlap → highest confidence**
+
+This overlap forms the **actionable anomaly set**.
+
+---
+
+### Step 6: Post-Stabilization Filtering (Critical Step)  
+**Script:** `run_post_stabilization_filter.py`
+
+To avoid false alarms:
+- **Jan–Feb 2025 removed** (system stabilization period)
+- **Mar–Dec 2025 retained** as steady-state data
+
+📌 This ensures we flag **operational anomalies**, not rollout artifacts.
+
+---
+
+### Step 7: District Risk Ranking  
+**Script:** `run_district_ranking.py`
+
+Districts were ranked based on:
+- number of anomalous months
+- persistence over time
+
+📌 Repeated anomalies matter more than one-time spikes.
+
+---
+
+## 5. Case Study: Kollam, Kerala (April 2025)
+
+- Detected **after system stabilization**
+- Flagged by **both statistical and ML methods**
+- Significant deviation from its own historical behavior
+
+📌 This makes Kollam a **high-confidence, audit-worthy case**, not a random fluctuation.
+
+---
+
+## 6. Visual Analysis  
+**Script:** `run_visualizations.py`
+
+Generated judge-ready visualizations:
+- Monthly anomaly trend (clear separation of rollout vs steady state)
+- Top anomalous districts
+- Detailed Kollam case study
 
 Saved under `outputs/figures/`.
 
 ---
 
-## Final Outputs
+## 7. Final Outputs
 
-| File | Description |
-|----|-----------|
-| `statistical_anomalies.csv` | Statistical anomalies |
-| `ml_anomalies.csv` | ML anomalies |
-| `post_stabilization_anomalies.csv` | Actionable anomalies |
-| `district_anomaly_ranking.csv` | Audit priority list |
-| `high_confidence_anomalies.csv` | Stat ∩ ML overlap |
-
----
-
-## Conclusion
-
-This project delivers a **practical anomaly detection framework** that:
-
-- separates system-wide noise from localized risk  
-- combines interpretability with ML robustness  
-- prioritizes districts based on persistent behavior  
-- produces reproducible, audit-ready outputs  
-
-The result is a **decision-support pipeline**, not a black-box model, suitable for real-world governance and monitoring.
+| Output | Purpose |
+|-----|-------|
+| statistical_anomalies.csv | Explainable anomalies |
+| ml_anomalies.csv | ML-detected anomalies |
+| post_stabilization_anomalies.csv | Actionable anomalies |
+| district_anomaly_ranking.csv | Audit priority |
+| high_confidence_anomalies.csv | Strongest signals |
 
 ---
 
-## How to Reproduce
+## 8. Final Conclusion
+
+This project delivers a **policy-ready anomaly detection framework** that:
+
+- separates system-wide noise from real district-level issues  
+- balances interpretability and ML robustness  
+- prioritizes sustained abnormal behavior  
+- produces reproducible, audit-friendly outputs  
+
+It is not a black-box model — it is a **decision-support system** suitable for governance, monitoring, and targeted investigation.
+
+---
+
+## 9. How to Reproduce the Entire Pipeline
 
 ```bash
 python scripts/run_audit.py
@@ -182,8 +224,6 @@ python scripts/run_anomaly_diagnostics.py
 python scripts/run_post_stabilization_filter.py
 python scripts/run_district_ranking.py
 python scripts/run_visualizations.py
-
-Repository Structure
 
 uidai-hackathon-2026/
 ├── data/
@@ -198,4 +238,3 @@ uidai-hackathon-2026/
 │   └── figures/
 ├── README.md
 └── requirements.txt
-
