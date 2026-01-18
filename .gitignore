@@ -1,6 +1,44 @@
-data/raw/*
-!data/raw/.gitkeep
-
+#####################################
+# Python
+#####################################
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+#####################################
+# Virtual environments
+#####################################
+.venv/
+venv/
+.env/
+
+#####################################
+# Jupyter (just in case)
+#####################################
 .ipynb_checkpoints/
-.env
+
+#####################################
+# OS / Editor
+#####################################
+.DS_Store
+Thumbs.db
+.vscode/
+
+#####################################
+# Outputs (keep folders, ignore files)
+#####################################
+outputs/audit/*.json
+outputs/figures/*
+outputs/tables/*
+
+#####################################
+# Processed data (CSV outputs are allowed)
+#####################################
+# ❌ Do NOT ignore data/processed/*.csv
+# These are intentional artifacts for judges
+
+#####################################
+# Logs
+#####################################
+*.log
